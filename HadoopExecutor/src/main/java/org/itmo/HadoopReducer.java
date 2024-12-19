@@ -1,12 +1,15 @@
+package org.itmo;
+
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
-import pojo.SaleCompositeKey;
+import org.itmo.pojo.SaleCompositeKey;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class HadoopReducer extends MapReduceBase implements Reducer<Text, SaleCompositeKey, Text, Text> {
@@ -29,9 +32,9 @@ public class HadoopReducer extends MapReduceBase implements Reducer<Text, SaleCo
         }
 
 
-        String result = String.format("%.2f\t%d", totalRevenue, totalQuantity);
+        String result = String.format("%s\t%d", totalRevenue, totalQuantity);
         logger.info(result);
-        output.collect(key, new Text(result));
+        output.collect(new Text(key), new Text(result));
 
     }
 }

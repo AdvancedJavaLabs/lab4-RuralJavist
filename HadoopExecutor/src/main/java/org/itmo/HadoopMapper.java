@@ -1,8 +1,10 @@
+package org.itmo;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reporter;
-import pojo.SaleCompositeKey;
+import org.itmo.pojo.SaleCompositeKey;
 
 import java.io.IOException;
 import java.util.logging.Logger;

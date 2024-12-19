@@ -1,4 +1,4 @@
-package pojo;
+package org.itmo.pojo;
 
 import lombok.Getter;
 import lombok.Setter;

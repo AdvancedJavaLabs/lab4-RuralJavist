@@ -1,18 +1,22 @@
-import java.io.IOException;
-import java.security.PrivilegedAction;
+package org.itmo;
 
 import lombok.SneakyThrows;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.security.UserGroupInformation;
-import pojo.SaleCompositeKey;
+import org.itmo.pojo.SaleCompositeKey;
+
+
+import java.io.IOException;
+import java.security.PrivilegedAction;
 
 public class HadoopRunnerConfig {
 
         public static void initHadoop(String inputPath, String outputPath) throws IOException {
 
-            UserGroupInformation loginUser = UserGroupInformation.createRemoteUser("root"); // или "makar"
+            UserGroupInformation loginUser = UserGroupInformation.createRemoteUser("root");
             loginUser.doAs(new PrivilegedAction<Void>() {
                 @SneakyThrows
                 @Override
@@ -30,7 +34,7 @@ public class HadoopRunnerConfig {
                     conf.setReducerClass(HadoopReducer.class);
                     conf.setInputFormat(TextInputFormat.class);
                     conf.setOutputFormat(TextOutputFormat.class);
-//                    conf.setOutputValueGroupingComparator(ValueComparator.class);
+
                     FileInputFormat.setInputPaths(conf,new Path(inputPath));
                     FileOutputFormat.setOutputPath(conf,new Path(outputPath));
                     JobClient.runJob(conf);
